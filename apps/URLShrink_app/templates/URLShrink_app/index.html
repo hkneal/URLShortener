@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+  <head>
+    <meta charset="utf-8">
+    <title>Testing</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'URLShrink_app/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+  </head>
+  <body>
+    <img src="{% static 'URLShrink_app/images/Fotosearch_k54377735.jpg' %}" alt="">
+    <header>
+      <h1>Hiram's URLShortener</h1>
+    </header>
+
+    <div class="formContainer">
+      <form class="" action="{% url 'shortenURL' %}" method="post">
+        {% csrf_token %}
+        {{ shorten_URL_form }}
+        {% if errorMessage %}
+          <div class="shortLinkContainer">
+            <p> {{ errorMessage }}</p>
+          </div>
+        {% endif %}
+        {% if url %}
+          <div class="shortLinkContainer">
+            <p>Your Shortened URL is:</p>
+            <a class="shortLink" href="{% url 'expandURL' url.nick_name %}">http://localhost:/shortenURL/{{ url.nick_name }}</a>
+          </div>
+        {% endif %}
+        <input class="submit" type="submit" value="Create a shorter URL">
+      </form>
+    </div>
+  </body>
+  <!-- Fotosearch --><a href="http://www.fotosearch.com">
+(c) Wrightstudio www.fotosearch.com Stock Photography
+</a>
+</html>
