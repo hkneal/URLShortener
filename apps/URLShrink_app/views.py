@@ -51,7 +51,7 @@ def returnExpanded(req):
             'nick_name' : form.cleaned_data['nick_name']
             }
         originalUrl = UrlName.objects.retrieve(postData)
-        if originalUrl['errorMessage']:
+        if 'errorMessage' in originalUrl:
             context = {
                 'shorten_URL_form' : shorten_URL_form(),
                 'expand_URL_form' : expand_URL_form(),
