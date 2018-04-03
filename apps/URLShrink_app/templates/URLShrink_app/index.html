@@ -13,6 +13,7 @@
     </header>
 
     <div class="formContainer">
+      <p id="formContainerHelp" >Generate a shorter URL</p>
       <form class="" action="{% url 'shortenURL' %}" method="post">
         {% csrf_token %}
         {{ shorten_URL_form }}
@@ -23,11 +24,32 @@
         {% endif %}
         {% if url %}
           <div class="shortLinkContainer">
+            <a class="shortLink" href="{{ url.full_URL }}">{{ url.full_URL }}</a>
             <p>Your Shortened URL is:</p>
-            <a class="shortLink" href="{% url 'expandURL' url.nick_name %}">http://localhost:/shortenURL/{{ url.nick_name }}</a>
+            <a class="shortLink" href="{{ url.nick_name }}">http://localhost:8000/{{ url.nick_name }}</a>
           </div>
         {% endif %}
         <input class="submit" type="submit" value="Create a shorter URL">
+      </form>
+    </div>
+
+    <div class="formContainerFull">
+      <p id="formContainerHelp" >View the full URL</p>
+      <form class="" action="{% url 'returnExpanded' %}" method="post">
+        {% csrf_token %}
+        {{ expand_URL_form }}
+        {% if errorMessageFull %}
+          <div class="shortLinkContainer">
+            <p> {{ errorMessageFull }}</p>
+          </div>
+        {% endif %}
+        {% if originalUrl %}
+          <div class="shortLinkContainer">
+            <p>Your Original URL is:</p>
+            <a class="shortLink" href="{{ originalUrl.full_URL }}">{{ originalUrl.full_URL }}</a>
+          </div>
+        {% endif %}
+        <input class="submit" type="submit" value="View the Full URL">
       </form>
     </div>
   </body>

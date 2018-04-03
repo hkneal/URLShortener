@@ -38,16 +38,22 @@ class UrlManager(models.Manager):
             }
 
     def retrieve(self, postData):
-        nick_name = postData['nick_name']
-        url = UrlName.objects.get(nick_name = postData['nick_name'])
-        full_URL = url.full_URL
-        message = "Your Full URL is " + full_URL
-        return {
-            'url':url,
-            'message' : message
-            }
+        nickname = postData['nick_name']
+        try:
+            url = UrlName.objects.get(nick_name = nickname)
+            full_URL = url.full_URL
+            message = "Your Full URL is " + full_URL
+            return {
+                'url':url,
+                'message' : message
+                }
+        except:
+            message = "Please try a different nickname, the nickname entered was invalid"
+            return {
+                'errorMessage' : message
+                }
 
-    #Create a isValid for URLName test url against regex express for typical urls
+
 
 # Create your models here.
 class UrlName(models.Model):

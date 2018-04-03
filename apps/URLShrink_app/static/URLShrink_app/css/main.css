@@ -45,14 +45,14 @@ a:hover {
 
 .shortLinkContainer{
   position: absolute;
-  background-color: #a2aeac;
-  padding: 15px;
+  background-color: white;
+  padding: 8px;
   width: 45%;
   margin-top: 4%;
   margin-left: 25%;
 }
 .shortLink, .shortLinkContainer p{
-  color: steelblue;
+  color: black;
   text-align: center;
   font-size: 15pt;
   margin-top: 0;
@@ -78,11 +78,30 @@ a:hover {
 }
 .formContainer{
   position: relative;
-  margin-top: 25%;
+  margin-top: 23%;
   margin-left: 2%;
   background-color: #a2aeac;
   padding: 40px;
+  padding-top: 26px;
   width: 90%;
+}
+
+.formContainerFull{
+  position: relative;
+  margin-top: 9%;
+  margin-left: 20%;
+  background-color: #a2aeac;
+  padding: 40px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 53%;
+  border-radius: 20px;
+}
+
+#formContainerHelp{
+  text-align: center;
+  color: white;
+  font-size: 14pt;
 }
 
 #id_full_URL{
