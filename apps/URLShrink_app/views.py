@@ -6,6 +6,7 @@ from .serializers import UrlNameSerializer
 from .models import UrlName
 from .forms import shorten_URL_form, expand_URL_form
 
+#Get hostname for API functions
 from django.contrib.sites.shortcuts import get_current_site
 
 # Main view for browser
