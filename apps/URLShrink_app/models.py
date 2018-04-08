@@ -5,29 +5,29 @@ import string, random
 
 nick_nameSet = set()
 
-def genterateNick_Name():
+def generateNick_Name():
     #Generates a random 8 character nickname from 0-9,A-Z, and a-z character set
-    nick_name = ""
-    for num in range(0,8):
-        nick_name += random.choice(string.digits + string.letters)
+    valid = False
+    while(not valid):
+        nick_name = ""
+        for num in range(0,8):
+            nick_name += random.choice(string.digits + string.letters)
+        if(not nick_name in nick_nameSet):
+            nick_nameSet.add(nick_name)
+            valid = True
+            break
     return nick_name
 
 class UrlManager(models.Manager):
     nick_nameSet = set()
     nick_name = ""
+
     def shortenURL(self, postData):
         full_URL = postData['full_URL']
-        print "inside of URLMANAGER - full_URL:", full_URL
-        valid = False
-        while(not valid):
-            #if we don't generate a unique nickname, regenerate
-            nick_name = genterateNick_Name()
-            if(not nick_name in nick_nameSet):
-                nick_nameSet.add(nick_name)
-                valid = True
-                break
+        #print "inside of URLMANAGER - full_URL:", full_URL
+        nick_name = generateNick_Name()
         urlMessage = "Your shortened URL is " + nick_name
-        print "Your shortened URL is " + nick_name
+        #print "Your shortened URL is " + nick_name
         url = UrlName.objects.create(
             full_URL = full_URL,
             nick_name = nick_name
@@ -58,7 +58,7 @@ class UrlManager(models.Manager):
 # Create your models here.
 class UrlName(models.Model):
     full_URL = models.CharField(max_length=2083, default="Enter in the full URL")
-    nick_name = models.CharField(max_length=8)
+    nick_name = models.CharField(primary_key = True, max_length=8, default = generateNick_Name)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UrlManager()
