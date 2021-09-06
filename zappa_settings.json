@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "aws_region": "us-east-1",
+        "django_settings": "URLShrink.settings",
+        "profile_name": "hkneal",
+        "project_name": "urlshortener",
+        "runtime": "python3.8",
+        "s3_bucket": "urlshorten-zappa"
+    }
+}

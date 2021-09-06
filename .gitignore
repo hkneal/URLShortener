@@ -1,3 +1,4 @@
 *.pyc
 djangoEnv/
 *.env
+.env
