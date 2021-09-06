@@ -49,7 +49,7 @@ def expandURL(req, nick_name):
 
 def returnExpanded(req):
     #Return the full url
-    print "Inside of Return Expanded###"
+    print("Inside of Return Expanded###")
     form = expand_URL_form(req.POST)
     if form.is_valid():
         postData = {
@@ -95,7 +95,7 @@ class CreateView(generics.CreateAPIView):
 
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        print serializer.data
+        print(serializer.data)
         return Response({"Success": "Your shortened URL is: " + current_site.name + "/" + serializer.data['nick_name'] }, headers=headers)
 
     def perform_create(self, serilizer):

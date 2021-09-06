@@ -11,7 +11,7 @@ def generateNick_Name():
     while(not valid):
         nick_name = ""
         for num in range(0,8):
-            nick_name += random.choice(string.digits + string.letters)
+            nick_name += random.choice(string.digits + string.ascii_letters)
         if(not nick_name in nick_nameSet):
             nick_nameSet.add(nick_name)
             valid = True
