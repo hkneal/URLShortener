@@ -2,3 +2,4 @@
 djangoEnv/
 *.env
 .env
+appsecrets.json

@@ -1,10 +1,11 @@
 {
     "dev": {
-        "aws_region": "us-east-1",
+        "aws_region": "us-west-2",
         "django_settings": "URLShrink.settings",
-        "profile_name": "hkneal",
+        "profile_name": "hkndev",
         "project_name": "urlshortener",
         "runtime": "python3.8",
-        "s3_bucket": "urlshorten-zappa"
+        "s3_bucket": "urlshort-zappa-dev",
+        "remote_env": "s3://urlshortener-appsecrets/appserects.json"
     }
 }

@@ -26,7 +26,12 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost:8000', 'http://http://www.urlittleurl']
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'localhost', 
+    'www.urlittleurl.com',
+    'a43ywzrftd.execute-api.us-west-2.amazonaws.com'
+    ]
 
 
 # Application definition
@@ -39,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_s3_storage',
     'rest_framework',
+    'zappa_django_utils'
 ]
 
 MIDDLEWARE = [
@@ -78,8 +85,12 @@ WSGI_APPLICATION = 'URLShrink.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        'NAME' : config('DB_NAME'),
+        'USER' : config('DB_USER'),
+        'PASSWORD' : config('DB_PASS'),
+        'HOST' : config('DB_URL'),
+        'PORT' : config('DB_PORT')
     }
 }
 
@@ -120,5 +131,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+S3_BUCKET_NAME = config('S3_BUCKET_NAME')
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+
+AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % S3_BUCKET_NAME
+AWS_DEFAULT_ACL = None
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+
+
